@@ -1,0 +1,17 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Component
+metadata:
+  name: hello-world-1
+  namespace: user-ns2
+spec:
+  application: hello-world-app
+  componentName: hello-world-1
+  containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/hello-world-1
+  resources: {}
+  source:
+    git:
+      context: ./
+      dockerfileUrl: Dockerfile1
+      revision: main
+      url: https://github.com/seanconroy2021/helloworld.git

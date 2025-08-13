@@ -1,0 +1,34 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlanAdmission
+metadata:
+  name: hello-world-app-release-plan-admission
+  namespace: managed-ns2
+  labels:
+    release.appstudio.openshift.io/block-releases: "false"
+spec:
+  applications:
+    - hello-world-app
+  origin: user-ns2
+  data:
+    mapping:
+      components:
+        - name: hello-world-1
+          repository: <quay.io/sconroykonflux/hello-world>
+          tags:
+            - latest
+            - hello-world-1
+            - "{{ release_timestamp }}"
+            - "{{ digest_sha }}"
+  pipeline:
+    pipelineRef:
+      resolver: git
+      params:
+        - name: url
+          value: https://github.com/konflux-ci/release-service-catalog.git
+        - name: revision
+          value: 0cbe8aebf8b85763b724dc292641d2c587f13b6e
+        - name: pathInRepo
+          value: pipelines/managed/push-to-external-registry/push-to-external-registry.yaml
+    serviceAccountName: managed-service-account
+  policy: default-hello-world-policy

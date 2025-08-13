@@ -1,0 +1,4 @@
+---
+resources:
+- tenant-service-account.yaml
+- tenant-rolebinding.yaml

@@ -1,0 +1,9 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: hello-world-release
+  namespace: user-ns2
+spec:
+  releasePlan: hello-world-app-release-plan
+  snapshot: hello-world-snapshot

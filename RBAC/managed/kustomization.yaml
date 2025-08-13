@@ -1,0 +1,4 @@
+---
+resources:
+- managed-service-account.yaml
+- managed-role-binding.yaml

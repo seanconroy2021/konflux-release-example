@@ -1,0 +1,4 @@
+---
+resources:
+- final-service-account.yaml
+- final-rolebinding.yaml

@@ -1,0 +1,37 @@
+---
+resources:
+- github.com/konflux-ci/konflux-ci//test/resources/demo-users/user?ref=512a9dc7c21d026f953dcd1234fad89e29afd308
+- github.com/konflux-ci/konflux-ci//test/resources/demo-users/user/managed-ns2?ref=512a9dc7c21d026f953dcd1234fad89e29afd308
+- RBAC/tenant/
+- RBAC/managed/
+- RBAC/final/
+- applications/hello-world-application.yaml
+- components/component-hello-world-1.yaml
+- components/component-hello-world-2.yaml
+- enterprise-contract-policy/enterprise-contract-policy-default.yaml
+- snapshot.yaml
+- releasePlan.yaml
+- releasePlanAdmissions.yaml
+
+secretGenerator:
+  - name: quay-registry-secret
+    namespace: managed-ns2
+    type: kubernetes.io/dockerconfigjson
+    files:
+      - .dockerconfigjson=secrets/.dockerConfig
+    options:
+      disableNameSuffixHash: true 
+  - name: public-key
+    namespace: tekton-pipelines
+    type: Opaque
+    files:
+      - cosign.pub=secrets/.publicKey
+    options:
+      disableNameSuffixHash: true 
+  - name: slack-webhook-secret
+    namespace: user-ns2
+    type: Opaque
+    files:
+      - webhook-url=secrets/.slackWebhook
+    options:
+      disableNameSuffixHash: true 

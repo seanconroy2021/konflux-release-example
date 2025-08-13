@@ -1,0 +1,72 @@
+---
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: output-release-resources
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+spec:
+  description: "Pipeline that output release resources and motd"
+  params:
+    - name: release
+      type: string
+      description: "The namespaced name (namespace/name) of the Release custom resource initiating this pipeline execution."
+    - name: releasePlan
+      type: string
+      description: "The namespaced name (namespace/name) of the releasePlan."
+    - name: snapshot
+      type: string
+      description: "The namespaced name (namespace/name) of the snapshot."
+    - name: motd
+      type: string
+      description: "The message of the day to be printed in the output."
+      default: "Welcome to a tenant Release Pipeline!"
+  tasks:
+    - name: print-motd
+      params:
+        - name: motd
+          value: $(params.motd)
+      taskSpec:
+        params:
+          - name: motd
+            type: string
+        steps:
+          - name: echo-motd
+            image: quay.io/konflux-ci/release-service-utils:latest
+            script: |
+              #!/bin/sh
+              set -eu
+              echo "MOTD: $(params.motd)"
+    - name: output-release-resources
+      params:
+        - name: release
+          value: $(params.release)
+        - name: releasePlan
+          value: $(params.releasePlan)
+        - name: snapshot
+          value: $(params.snapshot)
+      taskSpec:
+        params:
+          - name: release
+            type: string
+          - name: releasePlan
+            type: string
+          - name: snapshot
+            type: string
+        steps:
+          - name: output-resources
+            image: quay.io/konflux-ci/release-service-utils:latest
+            script: |
+              #!/bin/sh
+              set -eu
+              
+              echo "Release Name: $(params.release)"
+              get-resource "release" $(params.release)
+
+              echo "Release Plan Name: $(params.releasePlan)"
+              get-resource "releasePlan" $(params.releasePlan)
+
+              echo "Snapshot Name: $(params.snapshot)"
+              get-resource "snapshot" $(params.snapshot)
+
+              echo "All resources have been outputed successfully."
