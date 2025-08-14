@@ -31,7 +31,7 @@ spec:
         - name: url
           value: https://github.com/konflux-ci/community-catalog.git
         - name: revision
-          value: 477b1931dce8f73fc7cf6d1ce7ebba0bf78bc081
+          value: a5e45c62d8a5651b6449db94d5da22d79dba8d05
         - name: pathInRepo
           value: pipelines/notify-slack-on-failure/notify-slack-on-failure.yaml
     params:
