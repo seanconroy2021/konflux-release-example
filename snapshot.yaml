@@ -3,9 +3,8 @@ apiVersion: appstudio.redhat.com/v1alpha1
 kind: Snapshot
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/seanconroy2021/helloworld?rev=4ce22d3ae6a5833a9b5779ecdcecfb813e3c035e
-    build.appstudio.redhat.com/commit_sha: 4ce22d3ae6a5833a9b5779ecdcecfb813e3c035e
-    build.appstudio.redhat.com/pipeline_name: docker-build
+    build.appstudio.openshift.io/repo: https://github.com/seanconroy2021/helloworld?rev=0d63e1d6d35f64e4f77e7af5f06c98ef42fbb29d
+    build.appstudio.redhat.com/commit_sha: 0d63e1d6d35f64e4f77e7af5f06c98ef42fbb29d
   labels:
     appstudio.openshift.io/application: hello-world-app
     appstudio.openshift.io/component: hello-world-1
@@ -16,11 +15,11 @@ spec:
   application: hello-world-app
   artifacts: {}
   components:
-  - containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/hello-world-1@sha256:4f5cc311339079c2d06ced095bda2cfb8fe903a9d7519645d9067e17fd144388
+  - containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/hello-world-1@sha256:dc8196748c7fb967356c74e8d80bc713a07dc736bfb82cef481050ace07cbca7
     name: hello-world-1
     source:
       git:
-        revision: fa4918a45fe6b5befbeee22510842d3379067443
+        revision: 0d63e1d6d35f64e4f77e7af5f06c98ef42fbb29d
         url: https://github.com/seanconroy2021/helloworld
   - containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/helloworld-d911d@sha256:fd133678768adbdbee9468304110d2e6805e0165707b725750a37438d629fd72
     name: helloworld-2
