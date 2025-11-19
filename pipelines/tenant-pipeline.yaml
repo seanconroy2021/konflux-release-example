@@ -21,6 +21,10 @@ spec:
       type: string
       description: "The message of the day to be printed in the output."
       default: "Welcome to a tenant Release Pipeline!"
+    - name: pipelineFailOnError
+      type: string
+      description: "If 'true', the pipeline simulates an error and fails."
+      default: "false"
   tasks:
     - name: print-motd
       params:
@@ -45,6 +49,8 @@ spec:
           value: $(params.releasePlan)
         - name: snapshot
           value: $(params.snapshot)
+        - name: pipelineFailOnError
+          value: $(params.pipelineFailOnError)
       taskSpec:
         params:
           - name: release
@@ -52,6 +58,8 @@ spec:
           - name: releasePlan
             type: string
           - name: snapshot
+            type: string
+          - name: pipelineFailOnError
             type: string
         steps:
           - name: output-resources
@@ -69,4 +77,9 @@ spec:
               echo "Snapshot Name: $(params.snapshot)"
               get-resource "snapshot" $(params.snapshot)
 
-              echo "All resources have been outputed successfully."
+              if [ "$(params.pipelineFailOnError)" = "true" ]; then
+                1>&2 echo "Simulating an error to demonstrate pipeline fail on error."
+                exit 1
+              fi
+
+              echo "All resources have been outputed successfully."   
