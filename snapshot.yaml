@@ -3,8 +3,8 @@ apiVersion: appstudio.redhat.com/v1alpha1
 kind: Snapshot
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/seanconroy2021/helloworld?rev=922861ddb1216431327a8d69bbc7edccc3115bd3
-    build.appstudio.redhat.com/commit_sha: 922861ddb1216431327a8d69bbc7edccc3115bd3
+    build.appstudio.openshift.io/repo: https://github.com/seanconroy2021/helloworld?rev=3d7bd871261c36ecc266930cf10892fbcaa6d27d
+    build.appstudio.redhat.com/commit_sha: 3d7bd871261c36ecc266930cf10892fbcaa6d27d
   labels:
     appstudio.openshift.io/application: hello-world-app
     appstudio.openshift.io/component: hello-world-1
@@ -15,16 +15,16 @@ spec:
   application: hello-world-app
   artifacts: {}
   components:
-    - containerImage: 'quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/hello-world-1@sha256:9a723a2a4253d8642f0151caf1171e8de1bb3d82b289669dc017a297fe705b3f'
-      name: hello-world-1
-      source:
-        git:
-          revision: 922861ddb1216431327a8d69bbc7edccc3115bd3
-          url: 'https://github.com/seanconroy2021/helloworld'
-    - containerImage: 'quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/helloworld-d911d@sha256:fd133678768adbdbee9468304110d2e6805e0165707b725750a37438d629fd72'
-      name: helloworld-d911d
-      source:
-        git:
-          dockerfileUrl: Dockerfile
-          revision: 74176ce3a25524ac1652d72c1d21650450b7278d
-          url: 'https://github.com/seanconroy2021/helloworld.git'
+  - containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/hello-world-1@sha256:22071fa3625bbd8931faef911f7350c42cbf7b689d1180da159866b6e92570d4
+    name: hello-world-1
+    source:
+      git:
+        revision: 3d7bd871261c36ecc266930cf10892fbcaa6d27d
+        url: https://github.com/seanconroy2021/helloworld
+  - containerImage: quay.io/redhat-user-workloads/rh-ee-sconroy-tenant/helloworld-d911d@sha256:fd133678768adbdbee9468304110d2e6805e0165707b725750a37438d629fd72
+    name: helloworld-d911d
+    source:
+      git:
+        dockerfileUrl: Dockerfile
+        revision: 74176ce3a25524ac1652d72c1d21650450b7278d
+        url: https://github.com/seanconroy2021/helloworld.git
