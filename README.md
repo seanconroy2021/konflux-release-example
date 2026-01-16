@@ -108,8 +108,7 @@ After applying, verify that resources have been created:
 
 ## Ready to Release
 
-Currently the example release plan is configured with `release.appstudio.openshift.io/block-releases: "false"`, which means you will need to create a manual Release custom resource (CR).
-
+Currently the example release plan is configured with ` release.appstudio.openshift.io/auto-release: 'false'`, which means you will need to create a manual Release custom resource (CR).
 To trigger a release, apply the release manifest:
 ```bash
 oc apply -f release.yaml
